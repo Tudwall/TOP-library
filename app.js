@@ -1,5 +1,24 @@
+// Variable declarations.
+const addBookBtn = document.querySelector("#add-book");
+
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
+const FotR = new Book(
+  "The Fellowship of the Ring",
+  "J.R.R. Tolkien",
+  736,
+  true
+);
+const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
+const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);
+
 let myLibrary = [theHobbit, FotR, TT, ROTK];
 
+// Event Listeners.
+addBookBtn.addEventListener("click", () => {
+  myLibrary.push(addBookToLibrary());
+});
+
+// Functions.
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -17,17 +36,8 @@ function Book(title, author, pages, read) {
 function addBookToLibrary() {
   let title = prompt("Write the book's title: ", "");
   let author = prompt("Write the author's name: ", "");
-  let pages = prompt("How many pages?", "");
+  let pages = Number(prompt("How many pages?", ""));
   let read = prompt("Have you read it? (true or false)", "");
-  return new Book(title, author, pages, read);
+  const newBook = new Book(title, author, pages, read);
+  return newBook;
 }
-
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
-const FotR = new Book(
-  "The Fellowship of the Ring",
-  "J.R.R. Tolkien",
-  736,
-  true
-);
-const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
-const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);

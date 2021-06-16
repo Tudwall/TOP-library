@@ -57,7 +57,7 @@ function displayBooks() {
     const bookAuthor = document.createElement("p");
     bookAuthor.textContent = book.author;
     const bookPages = document.createElement("p");
-    bookPages.textContent = book.pages;
+    bookPages.textContent = `${book.pages} pages`;
     const bookRead = document.createElement("p");
     bookRead.textContent = book.read;
 

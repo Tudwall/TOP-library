@@ -1,6 +1,8 @@
 // Variable declarations.
 const container = document.querySelector("#container");
 const addBookBtn = document.querySelector("#add-book");
+const modal = document.querySelector("#modal");
+const closeBtn = document.querySelector("#close");
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 const FotR = new Book(
@@ -18,9 +20,15 @@ displayBooks();
 
 // Event Listeners.
 addBookBtn.addEventListener("click", () => {
+  modal.style.display = "block";
   myLibrary.push(addBookToLibrary());
   container.innerHTML = "";
   displayBooks();
+});
+
+closeBtn.addEventListener("click", () => (modal.style.display = "none"));
+window.addEventListener("click", (e) => {
+  if (e.target == modal) modal.style.display = "none";
 });
 
 // Functions.

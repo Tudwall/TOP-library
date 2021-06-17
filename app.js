@@ -19,9 +19,7 @@ displayBooks();
 // Event Listeners.
 addBookBtn.addEventListener("click", () => {
   myLibrary.push(addBookToLibrary());
-  for (let i = 0; i < myLibrary.length - 1; i++) {
-    container.removeChild(bookContainer);
-  }
+  container.innerHTML = "";
   displayBooks();
 });
 

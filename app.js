@@ -4,6 +4,12 @@ const addBookBtn = document.querySelector("#add-book");
 const modal = document.querySelector("#modal");
 const closeBtn = document.querySelector("#close");
 
+const titleField = document.querySelector("#title");
+const authorField = document.querySelector("#author");
+const pagesField = document.querySelector("#pages");
+const readField = document.querySelector("#read");
+const submitBtn = document.querySelector("#submit");
+
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 const FotR = new Book(
   "The Fellowship of the Ring",
@@ -21,9 +27,13 @@ displayBooks();
 // Event Listeners.
 addBookBtn.addEventListener("click", () => {
   modal.style.display = "block";
+});
+
+submitBtn.addEventListener("click", () => {
   myLibrary.push(addBookToLibrary());
   container.innerHTML = "";
   displayBooks();
+  modal.style.display = "none";
 });
 
 closeBtn.addEventListener("click", () => (modal.style.display = "none"));
@@ -36,7 +46,7 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  if (read) {
+  if ((read = "on")) {
     this.read = "already read";
   } else {
     this.read = "not read yet";
@@ -47,12 +57,11 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-  let title = prompt("Write the book's title: ", "");
-  let author = prompt("Write the author's name: ", "");
-  let pages = Number(prompt("How many pages?", ""));
-  let read = prompt("Have you read it? (true or false)", "");
-  const newBook = new Book(title, author, pages, read);
-  return newBook;
+  let title = titleField.value;
+  let author = authorField.value;
+  let pages = Number(pagesField.value);
+  let read = readField.value;
+  return new Book(title, author, pages, read);
 }
 
 function displayBooks() {

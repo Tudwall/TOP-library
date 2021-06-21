@@ -1,16 +1,12 @@
 // Variable declarations.
 class Book {
-  constructor(title, author, pages, read) {
+  constructor(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    if ((read = "on")) {
-      this.read = "already read";
-    } else {
-      this.read = "not read yet";
-    }
+    this.isRead = isRead;
     this.info = function () {
-      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
+      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
     };
   }
 }
@@ -64,8 +60,8 @@ function addBookToLibrary() {
   let title = titleField.value;
   let author = authorField.value;
   let pages = Number(pagesField.value);
-  let read = readField.value;
-  return new Book(title, author, pages, read);
+  let isRead = readField.checked;
+  return new Book(title, author, pages, isRead);
 }
 
 function displayBooks() {
@@ -78,7 +74,11 @@ function displayBooks() {
     const bookPages = document.createElement("p");
     bookPages.textContent = `${book.pages} pages`;
     const bookRead = document.createElement("p");
-    bookRead.textContent = book.read;
+    if (book.isRead == true) {
+      bookRead.textContent = "Already read";
+    } else {
+      bookRead.textContent = "Not read yet";
+    }
 
     bookContainer.style.border = "2px solid black";
     bookContainer.style.margin = "2vh";

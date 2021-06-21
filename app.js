@@ -1,4 +1,4 @@
-// Variable declarations.
+// Declarations.
 class Book {
   constructor(title, author, pages, isRead) {
     this.title = title;
@@ -10,6 +10,18 @@ class Book {
     };
   }
 }
+
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
+const FOTR = new Book(
+  "The Fellowship of the Ring",
+  "J.R.R. Tolkien",
+  736,
+  true
+);
+const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
+const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);
+
+let myLibrary = [theHobbit, FOTR, TT, ROTK];
 
 // Modal selectors.
 const container = document.querySelector("#container");
@@ -23,18 +35,6 @@ const authorField = document.querySelector("#author");
 const pagesField = document.querySelector("#pages");
 const readField = document.querySelector("#read");
 const submitBtn = document.querySelector("#submit");
-
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
-const FotR = new Book(
-  "The Fellowship of the Ring",
-  "J.R.R. Tolkien",
-  736,
-  true
-);
-const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
-const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);
-
-let myLibrary = [theHobbit, FotR, TT, ROTK];
 
 displayBooks();
 

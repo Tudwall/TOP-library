@@ -42,18 +42,20 @@ window.addEventListener("click", (e) => {
 });
 
 // Functions.
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  if ((read = "on")) {
-    this.read = "already read";
-  } else {
-    this.read = "not read yet";
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    if ((read = "on")) {
+      this.read = "already read";
+    } else {
+      this.read = "not read yet";
+    }
+    this.info = function () {
+      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
+    };
   }
-  this.info = function () {
-    return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
-  };
 }
 
 function addBookToLibrary() {

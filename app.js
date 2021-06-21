@@ -1,4 +1,20 @@
 // Variable declarations.
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    if ((read = "on")) {
+      this.read = "already read";
+    } else {
+      this.read = "not read yet";
+    }
+    this.info = function () {
+      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
+    };
+  }
+}
+
 const container = document.querySelector("#container");
 const addBookBtn = document.querySelector("#add-book");
 const modal = document.querySelector("#modal");
@@ -42,22 +58,6 @@ window.addEventListener("click", (e) => {
 });
 
 // Functions.
-class Book {
-  constructor(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    if ((read = "on")) {
-      this.read = "already read";
-    } else {
-      this.read = "not read yet";
-    }
-    this.info = function () {
-      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
-    };
-  }
-}
-
 function addBookToLibrary() {
   let title = titleField.value;
   let author = authorField.value;

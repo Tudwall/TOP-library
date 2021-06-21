@@ -15,11 +15,13 @@ class Book {
   }
 }
 
+// Modal selectors.
 const container = document.querySelector("#container");
 const addBookBtn = document.querySelector("#add-book");
 const modal = document.querySelector("#modal");
 const closeBtn = document.querySelector("#close");
 
+// Form selectors.
 const titleField = document.querySelector("#title");
 const authorField = document.querySelector("#author");
 const pagesField = document.querySelector("#pages");

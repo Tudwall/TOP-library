@@ -74,12 +74,16 @@ function createBook(book) {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("book-container");
   const bookTitle = document.createElement("h2");
+  bookTitle.classList.add("book-title");
   bookTitle.textContent = book.title;
   const bookAuthor = document.createElement("p");
+  bookAuthor.classList.add("book-author");
   bookAuthor.textContent = book.author;
   const bookPages = document.createElement("p");
+  bookPages.classList.add("book-pages");
   bookPages.textContent = `${book.pages} pages`;
   const bookRead = document.createElement("p");
+  bookRead.classList.add("book-read");
   if (book.isRead) {
     bookRead.textContent = "Already read";
   } else {
@@ -87,10 +91,19 @@ function createBook(book) {
   }
 
   const delBtn = document.createElement("button");
+  delBtn.classList.add("delete-item-btn");
   delBtn.innerHTML = "&times;";
 
   const toggleReadBtn = document.createElement("button");
+  toggleReadBtn.classList.add("toggle-read-btn");
   toggleReadBtn.textContent = "Toggle read status";
+
+  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
+
+  delBtn.addEventListener("click", () => {
+    myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
+    displayBooks();
+  });
 
   toggleReadBtn.addEventListener("click", () => {
     if (book.isRead) {
@@ -100,13 +113,6 @@ function createBook(book) {
       book.isRead = true;
       bookRead.textContent = "Already read";
     }
-  });
-
-  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
-
-  delBtn.addEventListener("click", () => {
-    myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
-    displayBooks();
   });
 
   bookContainer.appendChild(bookTitle);

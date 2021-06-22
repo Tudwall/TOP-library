@@ -72,6 +72,7 @@ function displayBooks() {
 
 function createBook(book) {
   const bookContainer = document.createElement("div");
+  bookContainer.classList.add("book-container");
   const bookTitle = document.createElement("h2");
   bookTitle.textContent = book.title;
   const bookAuthor = document.createElement("p");
@@ -94,11 +95,6 @@ function createBook(book) {
     myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
     displayBooks();
   });
-
-  bookContainer.style.border = "2px solid black";
-  bookContainer.style.margin = "2vh";
-  bookContainer.style.padding = "20px";
-  bookContainer.style.width = "200px";
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);

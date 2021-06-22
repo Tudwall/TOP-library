@@ -80,7 +80,7 @@ function createBook(book) {
   const bookPages = document.createElement("p");
   bookPages.textContent = `${book.pages} pages`;
   const bookRead = document.createElement("p");
-  if (book.isRead == true) {
+  if (book.isRead) {
     bookRead.textContent = "Already read";
   } else {
     bookRead.textContent = "Not read yet";
@@ -88,6 +88,19 @@ function createBook(book) {
 
   const delBtn = document.createElement("button");
   delBtn.textContent = "x";
+
+  const toggleReadBtn = document.createElement("button");
+  toggleReadBtn.textContent = "Toggle read status";
+
+  toggleReadBtn.addEventListener("click", () => {
+    if (book.isRead) {
+      book.isRead = false;
+      bookRead.textContent = "Not read yet";
+    } else {
+      book.isRead = true;
+      bookRead.textContent = "Already read";
+    }
+  });
 
   bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
 
@@ -101,5 +114,6 @@ function createBook(book) {
   bookContainer.appendChild(bookPages);
   bookContainer.appendChild(bookRead);
   bookContainer.appendChild(delBtn);
+  bookContainer.appendChild(toggleReadBtn);
   container.appendChild(bookContainer);
 }

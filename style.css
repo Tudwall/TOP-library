@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #31312e;
+}
+
 h2,
 p {
   color: lightgray;
@@ -84,6 +88,10 @@ footer {
   width: 200px;
   height: 450px;
   background-color: #31312e;
+}
+.book-container:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 5px black;
 }
 
 .book-title,

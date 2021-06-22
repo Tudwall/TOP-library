@@ -45,7 +45,6 @@ addBookBtn.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", () => {
   myLibrary.push(addBookToLibrary());
-  container.innerHTML = "";
   displayBooks();
   modal.style.display = "none";
 });
@@ -65,30 +64,46 @@ function addBookToLibrary() {
 }
 
 function displayBooks() {
-  myLibrary.forEach((book) => {
-    const bookContainer = document.createElement("div");
-    const bookTitle = document.createElement("h2");
-    bookTitle.textContent = book.title;
-    const bookAuthor = document.createElement("p");
-    bookAuthor.textContent = book.author;
-    const bookPages = document.createElement("p");
-    bookPages.textContent = `${book.pages} pages`;
-    const bookRead = document.createElement("p");
-    if (book.isRead == true) {
-      bookRead.textContent = "Already read";
-    } else {
-      bookRead.textContent = "Not read yet";
-    }
+  container.innerHTML = "";
+  for (let i = 0; i < myLibrary.length; i++) {
+    createBook(myLibrary[i]);
+  }
+}
 
-    bookContainer.style.border = "2px solid black";
-    bookContainer.style.margin = "2vh";
-    bookContainer.style.padding = "20px";
-    bookContainer.style.width = "200px";
+function createBook(book) {
+  const bookContainer = document.createElement("div");
+  const bookTitle = document.createElement("h2");
+  bookTitle.textContent = book.title;
+  const bookAuthor = document.createElement("p");
+  bookAuthor.textContent = book.author;
+  const bookPages = document.createElement("p");
+  bookPages.textContent = `${book.pages} pages`;
+  const bookRead = document.createElement("p");
+  if (book.isRead == true) {
+    bookRead.textContent = "Already read";
+  } else {
+    bookRead.textContent = "Not read yet";
+  }
 
-    bookContainer.appendChild(bookTitle);
-    bookContainer.appendChild(bookAuthor);
-    bookContainer.appendChild(bookPages);
-    bookContainer.appendChild(bookRead);
-    container.appendChild(bookContainer);
+  const delBtn = document.createElement("button");
+  delBtn.textContent = "x";
+
+  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
+
+  delBtn.addEventListener("click", () => {
+    myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
+    displayBooks();
   });
+
+  bookContainer.style.border = "2px solid black";
+  bookContainer.style.margin = "2vh";
+  bookContainer.style.padding = "20px";
+  bookContainer.style.width = "200px";
+
+  bookContainer.appendChild(bookTitle);
+  bookContainer.appendChild(bookAuthor);
+  bookContainer.appendChild(bookPages);
+  bookContainer.appendChild(bookRead);
+  bookContainer.appendChild(delBtn);
+  container.appendChild(bookContainer);
 }

@@ -87,7 +87,7 @@ function createBook(book) {
   }
 
   const delBtn = document.createElement("button");
-  delBtn.textContent = "x";
+  delBtn.innerHTML = "&times;";
 
   const toggleReadBtn = document.createElement("button");
   toggleReadBtn.textContent = "Toggle read status";

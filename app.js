@@ -119,7 +119,7 @@ function createBook(book) {
   bookContainer.appendChild(bookAuthor);
   bookContainer.appendChild(bookPages);
   bookContainer.appendChild(bookRead);
-  bookContainer.appendChild(delBtn);
   bookContainer.appendChild(toggleReadBtn);
+  bookContainer.appendChild(delBtn);
   container.appendChild(bookContainer);
 }

@@ -4,7 +4,37 @@
   box-sizing: border-box;
 }
 
+h2,
+p {
+  color: lightgray;
+}
+
 button {
+  padding: 15px;
+  margin: 10px;
+  border: 1px solid black;
+  font-size: 1.1em;
+  background-color: #76746a;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 5px black;
+}
+
+input {
+  background-color: #31312e;
+  color: lightgray;
+  border: 1px solid black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0.5vh;
+  left: 0.5vw;
+}
+
+#add-book {
   margin: 1em;
 }
 
@@ -20,22 +50,22 @@ button {
 }
 
 #modal-content {
-  background-color: #fefefe;
+  background-color: #31312e;
+  color: lightgray;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid black;
   width: 80%;
 }
 
 #close {
-  color: #aaaaaa;
+  color: #76746a;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#close:hover,
-#close:focus {
+#close:hover {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -44,6 +74,7 @@ button {
 #container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .book-container {
@@ -51,4 +82,19 @@ button {
   margin: 2vh;
   padding: 20px;
   width: 200px;
+  height: 450px;
+  background-color: #31312e;
+}
+
+.book-title,
+.book-read {
+  margin-bottom: 2em;
+}
+
+.toggle-read-btn {
+  background-color: #76746a;
+}
+
+.delete-item-btn {
+  background-color: #d72c2c;
 }

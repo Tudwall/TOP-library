@@ -147,3 +147,9 @@ function storageAvailable(type) {
     );
   }
 }
+
+function populateStorage() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    localStorage.setItem(`${myLibrary[i].title}`, JSON.stringify(myLibrary[i]));
+  }
+}

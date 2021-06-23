@@ -18,7 +18,7 @@ const FOTR = new Book(
 const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
 const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);
 
-let myLibrary = [theHobbit, FOTR, TT, ROTK];
+let myLibrary = [];
 
 // Modal selectors.
 const container = document.querySelector("#container");
@@ -150,6 +150,10 @@ function storageAvailable(type) {
 
 function populateStorage() {
   for (let i = 0; i < myLibrary.length; i++) {
-    localStorage.setItem(`${myLibrary[i].title}`, JSON.stringify(myLibrary[i]));
+    localStorage.setItem(myLibrary, myLibrary);
   }
+}
+
+function getBooks() {
+  if (localStorage = myLibrary)
 }

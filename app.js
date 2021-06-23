@@ -18,7 +18,7 @@ const FOTR = new Book(
 const TT = new Book("The Two Towers", "J.R.R. Tolkien", 608, true);
 const ROTK = new Book("The Return of the King", "J.R.R. Tolkien", 736, true);
 
-let myLibrary = [theHobbit, FOTR, TT, ROTK];
+let myLibrary = [];
 
 // Modal selectors.
 const container = document.querySelector("#container");
@@ -100,17 +100,22 @@ function createBook(book) {
   delBtn.addEventListener("click", () => {
     myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
     displayBooks();
+    saveBooks();
   });
 
   toggleReadBtn.addEventListener("click", () => {
     if (book.isRead) {
       book.isRead = false;
       bookRead.textContent = "Not read yet";
+      saveBooks();
     } else {
       book.isRead = true;
       bookRead.textContent = "Already read";
+      saveBooks();
     }
   });
+
+  saveBooks();
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
@@ -120,3 +125,42 @@ function createBook(book) {
   bookContainer.appendChild(delBtn);
   container.appendChild(bookContainer);
 }
+
+function storageAvailable(type) {
+  var storage;
+  try {
+    storage = window[type];
+    var x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+}
+
+function saveBooks() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function getBooks() {
+  myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+  if (myLibrary == null) myLibrary = [];
+  displayBooks();
+}
+
+getBooks();

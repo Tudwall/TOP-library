@@ -5,9 +5,6 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-    this.info = function () {
-      return `${this.name} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
-    };
   }
 }
 

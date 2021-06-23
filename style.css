@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #31312e;
-}
-
 h2,
 p {
   color: lightgray;

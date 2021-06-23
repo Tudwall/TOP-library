@@ -100,17 +100,22 @@ function createBook(book) {
   delBtn.addEventListener("click", () => {
     myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
     displayBooks();
+    saveBooks();
   });
 
   toggleReadBtn.addEventListener("click", () => {
     if (book.isRead) {
       book.isRead = false;
       bookRead.textContent = "Not read yet";
+      saveBooks();
     } else {
       book.isRead = true;
       bookRead.textContent = "Already read";
+      saveBooks();
     }
   });
+
+  saveBooks();
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
@@ -148,12 +153,14 @@ function storageAvailable(type) {
   }
 }
 
-function populateStorage() {
-  for (let i = 0; i < myLibrary.length; i++) {
-    localStorage.setItem(myLibrary, myLibrary);
-  }
+function saveBooks() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
 function getBooks() {
-  if (localStorage = myLibrary)
+  myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+  if (myLibrary == null) myLibrary = [];
+  displayBooks();
 }
+
+getBooks();

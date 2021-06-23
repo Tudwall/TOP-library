@@ -85,6 +85,9 @@ footer {
   width: 200px;
   height: 450px;
   background-color: #31312e;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 .book-container:hover {
   transform: scale(1.1);

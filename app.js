@@ -87,23 +87,9 @@ function createBook(book) {
 
   bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
 
-  delBtn.addEventListener("click", () => {
-    myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
-    displayBooks();
-    saveBooks();
-  });
+  delBtn.addEventListener("click", () => deleteBook);
 
-  toggleReadBtn.addEventListener("click", () => {
-    if (book.isRead) {
-      book.isRead = false;
-      bookRead.textContent = "Not read yet";
-      saveBooks();
-    } else {
-      book.isRead = true;
-      bookRead.textContent = "Already read";
-      saveBooks();
-    }
-  });
+  toggleReadBtn.addEventListener("click", () => toggleRead);
 
   saveBooks();
 
@@ -114,6 +100,22 @@ function createBook(book) {
   bookContainer.appendChild(toggleReadBtn);
   bookContainer.appendChild(delBtn);
   container.appendChild(bookContainer);
+}
+
+function deleteBook() {
+  myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
+  displayBooks();
+  saveBooks();
+}
+
+function toggleRead() {
+  if (this.isRead) {
+    this.isRead = false;
+    saveBooks();
+  } else {
+    this.isRead = true;
+    saveBooks();
+  }
 }
 
 function saveBooks() {

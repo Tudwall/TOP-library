@@ -96,22 +96,6 @@ function createBook(book) {
   container.appendChild(bookContainer);
 }
 
-function deleteBook() {
-  myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
-  displayBooks();
-  saveBooks();
-}
-
-function toggleRead() {
-  if (this.isRead) {
-    this.isRead = false;
-    saveBooks();
-  } else {
-    this.isRead = true;
-    saveBooks();
-  }
-}
-
 function saveBooks() {
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }

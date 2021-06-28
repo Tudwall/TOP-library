@@ -71,11 +71,7 @@ function createBook(book) {
   bookPages.textContent = `${book.pages} pages`;
   const bookRead = document.createElement("p");
   bookRead.classList.add("book-read");
-  if (book.isRead) {
-    bookRead.textContent = "Already read";
-  } else {
-    bookRead.textContent = "Not read yet";
-  }
+  bookRead.textContent = checkIsRead(book.isRead);
 
   const delBtn = document.createElement("button");
   delBtn.classList.add("delete-item-btn");
@@ -94,6 +90,14 @@ function createBook(book) {
   bookContainer.appendChild(toggleReadBtn);
   bookContainer.appendChild(delBtn);
   container.appendChild(bookContainer);
+}
+
+function checkIsRead(isRead) {
+  if (isRead) {
+    return "Already read";
+  } else {
+    return "Not read yet";
+  }
 }
 
 function saveBooks() {

@@ -57,18 +57,22 @@ function displayBooks() {
   }
 }
 
-function createBook(book) {
+function createBookCard(book) {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("book-container");
+
   const bookTitle = document.createElement("h2");
   bookTitle.classList.add("book-title");
   bookTitle.textContent = book.title;
+
   const bookAuthor = document.createElement("p");
   bookAuthor.classList.add("book-author");
   bookAuthor.textContent = book.author;
+
   const bookPages = document.createElement("p");
   bookPages.classList.add("book-pages");
   bookPages.textContent = `${book.pages} pages`;
+
   const bookRead = document.createElement("p");
   bookRead.classList.add("book-read");
   bookRead.textContent = checkIsRead(book.isRead);

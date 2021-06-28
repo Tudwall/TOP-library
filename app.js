@@ -87,12 +87,6 @@ function createBook(book) {
 
   bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
 
-  delBtn.addEventListener("click", () => deleteBook);
-
-  toggleReadBtn.addEventListener("click", () => toggleRead);
-
-  saveBooks();
-
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
   bookContainer.appendChild(bookPages);

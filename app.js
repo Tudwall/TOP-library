@@ -33,6 +33,7 @@ addBookBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", () => {
   myLibrary.push(addBookToLibrary());
   displayBooks();
+  saveBooks();
   modal.style.display = "none";
 });
 

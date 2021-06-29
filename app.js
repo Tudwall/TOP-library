@@ -53,13 +53,14 @@ function addBookToLibrary() {
 function displayBooks() {
   container.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
-    createBook(myLibrary[i]);
+    createBookCard(myLibrary[i]);
   }
 }
 
 function createBookCard(book) {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("book-container");
+  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
 
   const bookTitle = document.createElement("h2");
   bookTitle.classList.add("book-title");
@@ -80,12 +81,11 @@ function createBookCard(book) {
   const delBtn = document.createElement("button");
   delBtn.classList.add("delete-item-btn");
   delBtn.innerHTML = "&times;";
+  addDeleteButtonListener(delBtn, bookContainer);
 
   const toggleReadBtn = document.createElement("button");
   toggleReadBtn.classList.add("toggle-read-btn");
   toggleReadBtn.textContent = "Toggle read status";
-
-  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
@@ -102,6 +102,15 @@ function checkIsRead(isRead) {
   } else {
     return "Not read yet";
   }
+}
+
+function addDeleteButtonListener(button, card) {
+  button.addEventListener("click", () => {
+    const bookIndex = card.dataset.i;
+    myLibrary.splice(bookIndex, 1);
+    displayBooks();
+    saveBooks();
+  });
 }
 
 function saveBooks() {

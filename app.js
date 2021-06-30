@@ -31,6 +31,7 @@ addBookBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", () => {
+  formValidation();
   myLibrary.push(addBookToLibrary());
   displayBooks();
   saveBooks();
@@ -127,6 +128,25 @@ function addDeleteButtonListener(button, card) {
     displayBooks();
     saveBooks();
   });
+}
+
+function formValidation() {
+  if (titleField.value == "") {
+    alert("Please enter the book's title.");
+    titleField.focus();
+    return false;
+  }
+  if (authorField.value == "") {
+    alert("Please enter the author's name.");
+    authorField.focus();
+    return false;
+  }
+  if (pagesField.value == "") {
+    alert("Please enter the pages number.");
+    pagesField.focus();
+    return false;
+  }
+  return true;
 }
 
 function saveBooks() {

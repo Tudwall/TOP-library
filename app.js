@@ -31,9 +31,13 @@ addBookBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", () => {
-  myLibrary.push(addBookToLibrary());
-  displayBooks();
-  modal.style.display = "none";
+  if (formValidation()) {
+    myLibrary.push(addBookToLibrary());
+    displayBooks();
+    saveBooks();
+    modal.style.display = "none";
+    clearForm();
+  }
 });
 
 closeBtn.addEventListener("click", () => (modal.style.display = "none"));
@@ -53,59 +57,40 @@ function addBookToLibrary() {
 function displayBooks() {
   container.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
-    createBook(myLibrary[i]);
+    createBookCard(myLibrary[i]);
   }
 }
 
-function createBook(book) {
+function createBookCard(book) {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("book-container");
+  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
+
   const bookTitle = document.createElement("h2");
   bookTitle.classList.add("book-title");
   bookTitle.textContent = book.title;
+
   const bookAuthor = document.createElement("p");
   bookAuthor.classList.add("book-author");
   bookAuthor.textContent = book.author;
+
   const bookPages = document.createElement("p");
   bookPages.classList.add("book-pages");
   bookPages.textContent = `${book.pages} pages`;
+
   const bookRead = document.createElement("p");
   bookRead.classList.add("book-read");
-  if (book.isRead) {
-    bookRead.textContent = "Already read";
-  } else {
-    bookRead.textContent = "Not read yet";
-  }
+  bookRead.textContent = checkIsRead(book.isRead);
 
   const delBtn = document.createElement("button");
   delBtn.classList.add("delete-item-btn");
   delBtn.innerHTML = "&times;";
+  addDeleteButtonListener(delBtn, bookContainer);
 
   const toggleReadBtn = document.createElement("button");
   toggleReadBtn.classList.add("toggle-read-btn");
   toggleReadBtn.textContent = "Toggle read status";
-
-  bookContainer.setAttribute("data-i", myLibrary.indexOf(book));
-
-  delBtn.addEventListener("click", () => {
-    myLibrary.splice(bookContainer.getAttribute("data-i"), 1);
-    displayBooks();
-    saveBooks();
-  });
-
-  toggleReadBtn.addEventListener("click", () => {
-    if (book.isRead) {
-      book.isRead = false;
-      bookRead.textContent = "Not read yet";
-      saveBooks();
-    } else {
-      book.isRead = true;
-      bookRead.textContent = "Already read";
-      saveBooks();
-    }
-  });
-
-  saveBooks();
+  addToggleReadButtonListener(toggleReadBtn, book, bookRead);
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
@@ -114,6 +99,63 @@ function createBook(book) {
   bookContainer.appendChild(toggleReadBtn);
   bookContainer.appendChild(delBtn);
   container.appendChild(bookContainer);
+}
+
+function checkIsRead(isRead) {
+  if (isRead) {
+    return "Already read";
+  } else {
+    return "Not read yet";
+  }
+}
+
+function addToggleReadButtonListener(button, book, bookRead) {
+  button.addEventListener("click", () => {
+    if (book.isRead) {
+      book.isRead = false;
+      bookRead.textContent = checkIsRead(book.isRead);
+      saveBooks();
+    } else {
+      book.isRead = true;
+      bookRead.textContent = checkIsRead(book.isRead);
+      saveBooks();
+    }
+  });
+}
+
+function addDeleteButtonListener(button, card) {
+  button.addEventListener("click", () => {
+    const bookIndex = card.dataset.i;
+    myLibrary.splice(bookIndex, 1);
+    displayBooks();
+    saveBooks();
+  });
+}
+
+function formValidation() {
+  if (titleField.value == "") {
+    alert("Please enter the book's title.");
+    titleField.focus();
+    return false;
+  }
+  if (authorField.value == "") {
+    alert("Please enter the author's name.");
+    authorField.focus();
+    return false;
+  }
+  if (pagesField.value == "") {
+    alert("Please enter the pages number.");
+    pagesField.focus();
+    return false;
+  }
+  return true;
+}
+
+function clearForm() {
+  titleField.value = "";
+  authorField.value = "";
+  pagesField.value = "";
+  readField.checked = false;
 }
 
 function saveBooks() {

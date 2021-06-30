@@ -31,11 +31,13 @@ addBookBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", () => {
-  formValidation();
-  myLibrary.push(addBookToLibrary());
-  displayBooks();
-  saveBooks();
-  modal.style.display = "none";
+  if (formValidation()) {
+    myLibrary.push(addBookToLibrary());
+    displayBooks();
+    saveBooks();
+    modal.style.display = "none";
+    clearForm();
+  }
 });
 
 closeBtn.addEventListener("click", () => (modal.style.display = "none"));
@@ -147,6 +149,13 @@ function formValidation() {
     return false;
   }
   return true;
+}
+
+function clearForm() {
+  titleField.value = "";
+  authorField.value = "";
+  pagesField.value = "";
+  readField.checked = false;
 }
 
 function saveBooks() {

@@ -87,6 +87,7 @@ function createBookCard(book) {
   const toggleReadBtn = document.createElement("button");
   toggleReadBtn.classList.add("toggle-read-btn");
   toggleReadBtn.textContent = "Toggle read status";
+  addToggleReadButtonListener(toggleReadBtn, book, bookRead);
 
   bookContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookAuthor);
@@ -103,6 +104,20 @@ function checkIsRead(isRead) {
   } else {
     return "Not read yet";
   }
+}
+
+function addToggleReadButtonListener(button, book, bookRead) {
+  button.addEventListener("click", () => {
+    if (book.isRead) {
+      book.isRead = false;
+      bookRead.textContent = checkIsRead(book.isRead);
+      saveBooks();
+    } else {
+      book.isRead = true;
+      bookRead.textContent = checkIsRead(book.isRead);
+      saveBooks();
+    }
+  });
 }
 
 function addDeleteButtonListener(button, card) {
